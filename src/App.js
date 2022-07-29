@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function App() {
@@ -12,6 +12,15 @@ function App() {
       age: age
     })
   }
+
+  const fetchdata = async () => {
+    const result = await axios.get('https://sheet.best/api/sheets/4a40da8e-cb9d-4a76-bb13-8ee3471bd359')
+    console.log(result.data)
+  }
+
+  useEffect(() => {
+    fetchdata();
+  }, [])
 
 
   return (
