@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
 
 function App() {
+  const [name, setname] = useState('');
+  const [age, setage] = useState('')
+
+  const submithandler = (e) => {
+    e.preventDefault();
+    axios.post('https://sheet.best/api/sheets/4a40da8e-cb9d-4a76-bb13-8ee3471bd359', {
+      name: name,
+      age: age
+    })
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form onSubmit={submithandler}>
+        <label>
+          name
+          <input onChange={(e) => setname(e.target.value)}></input>
+        </label>
+        <br></br>
+        <label>
+          age
+          <input onChange={(e) => setage(e.target.value)}></input>
+        </label>
+        <input type="submit" />
+      </form>
     </div>
   );
 }
